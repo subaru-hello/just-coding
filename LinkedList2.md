@@ -1,0 +1,28 @@
+### 問題
+
+> Given the `head` of a linked list, return *the node where the cycle begins. If there is no cycle, return* `null`.
+> 
+> 
+> There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the `next` pointer. Internally, `pos` is used to denote the index of the node that tail's `next` pointer is connected to (**0-indexed**). It is `-1` if there is no cycle. **Note that** `pos` **is not passed as a parameter**.
+> 
+> **Do not modify** the linked list.
+> 
+
+### 方針
+
+Floyd Tutoise and Hayeを使って、cycleを探す。
+
+兎が亀と出会ったらcycleがある。
+
+出会ったと時に亀のポインタをheadに戻して、再度出会った地点がcycleのスタートポイントになる。
+
+一方で、兎が最後尾まで達した場合、cycleが無いということなのでnullptrを返す
+
+### Code
+
+Time  Complexity: O(N)
+Space Complexity: O(1)
+
+```cpp
+
+```
