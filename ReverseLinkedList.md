@@ -29,8 +29,11 @@ public:
         ListNode* next = nullptr;
         ListNode* curr = head;
         while(curr != nullptr){
+  	    // 現在地点になる予定のポインタを保持しておく
             next = curr -> next;
+	    //  付け替え
             curr -> next =  prev;
+	    // 前と現在の付け替え
             prev = curr;
             curr = next;
         }
