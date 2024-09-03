@@ -42,6 +42,36 @@ public:
 
 Two Pass hash Table
 
-```cpp
+time O(N) at most.
 
+**Space Complexity:** O(n) 
+
+In the worst case, all elements in nums are unique, so numMap will store n elements.
+
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // init a numMap to hold indexes for values in nums;
+        unordered_map<int, int> numMap;
+        int n = nums.size();
+        // build a numMap
+        for(int i = 0; i < n; i++) {
+            numMap[nums[i]] = i;
+        }
+
+        // if target - numMap[nums[i]] contain a numMap and not a same return i and numMap index
+        for(int i = 0; i < n; i++) {
+            int complement = target - nums[i];
+            if(numMap.count(complement) && numMap[complement] != i) {
+                return {i, numMap[complement]};
+            }
+        }
+        return {};
+    }
+};
 ```
+
+**One-pass Hash Table**
+
+
