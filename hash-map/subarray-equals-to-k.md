@@ -50,6 +50,11 @@ public:
 
 prefix sumを使用する。
 
+```cpp
+sum(i,j) = prefix[j] − prefix[i−1]
+prefix[i−1] = prefix[j] − k
+```
+
 > A prefix sum array, also known as a cumulative sum array, is a derived array that stores the cumulative sum of elements in a given array.
 > 
 
@@ -59,6 +64,73 @@ a given array: [1,2,5,6]
 
 prefix sum: [1,3,8,14]
 
-```cpp
+1. prefix sumを計算
+2. ひとつ前のprefix sumをトラックするMapを作成
+3. kと一致する、あるいは直前のMap値と足したらkと一致する場合
 
+```cpp
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int n = nums.size();
+        unordered_map<int, int> mp;
+        vector<int> prefix_sum(n);
+        prefix_sum[0] = nums[0];
+        int ans = 0;
+
+        // build a prefix_sum, starting with pre[1]
+        for(int i = 1; i <n; ++i) {
+            prefix_sum[i] = prefix_sum[i-1] + nums[i];
+        }
+
+        for(int i=0; i < n; ++i) {
+            if(prefix_sum[i] -k == 0)
+                ans++;
+            // compare current prefix_sum - k iteratively.
+            if(mp.find(prefix_sum[i] - k) != mp.end()){
+              ans +=  mp[prefix_sum[i]-k];
+            }
+            mp[prefix_sum[i]]++;
+        }
+        return ans;
+    }
+};
+```
+
+mp.find(key)はkeyが見つかったらIteratorを返す
+
+keyが見つからなかったらmp.end()を返す。
+
+mp.end()は最後の要素を指すポインタのこと。
+
+mp.find()で最後まで要素が見つからなければIteratorのポインタがMapの最後になるから、mp.find() == mp.end()は要素がない場合という意味になる。
+
+ただ、mp.end()は番兵的な役割だから、Mapの最後の要素という意味は持たないことに注意。紛らわしい。。
+
+例)
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+
+int main() {
+    std::unordered_map<int, int> mp = {{1, 100}, {2, 200}, {3, 300}};
+
+    // Let's say the "last" element (in terms of insertion) is {3, 300}
+    auto it = mp.find(3);  // Find the key '3'
+
+    if (it != mp.end()) {
+        std::cout << "Found key 3 with value: " << it->second << std::endl;
+    } else {
+        std::cout << "Key 3 not found." << std::endl;
+    }
+
+    return 0;
+}
+```
+
+Output
+
+```cpp
+Found key 3 with value: 300
 ```
