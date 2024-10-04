@@ -1,6 +1,36 @@
 ## 概要
 
+https://leetcode.com/problems/word-break/
+
+> Given a string `s` and a dictionary of strings `wordDict`, return `true` if `s` can be segmented into a space-separated sequence of one or more dictionary words.
+> 
+> 
+> **Note** that the same word in the dictionary may be reused multiple times in the segmentation.
+> 
+
+## Intuition
+
+与えられるinputを確認する
+
+セグメンティング対象のstringとセグメントするワード配列。
+
+条件を確認する。
+
+- ワード配列には重複した文字がある可能性がある
+- 渡されない可能性がある
+- 
+
+方針として、
+
+- セグメントするワードがsのサブストリングと一致するかを１字づつトラバースする
+- 一致する位置をdpベクターに保存
+- dpベクターの最後がtrueだったら全てをセグメントかできる
+
+ような実装をする
+
 ## Code
+
+O(N^2)
 
 ```cpp
 class Solution {
