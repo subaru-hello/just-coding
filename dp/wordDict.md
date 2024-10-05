@@ -41,7 +41,7 @@ public:
        int n = s.size();
        vector<bool> dp(n+1, false);
        unordered_set<string> wordSet(wordDict.begin(),wordDict.end());
-        // Base Case: 0 is no word segmenting -> true;
+        // if dict is an empty, it is true;
         dp[0] = true;
         for (int i = 1; i <= n; i++) {
             // find whether segmented or not in each iteration until j reaches to s length
